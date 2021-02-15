@@ -17,12 +17,26 @@
   cursor: pointer;
   border-radius: 50px;
   color:white;
+  opacity: 0.75;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
 }
 
+.mess__call-btn:hover {
+  opacity: 1;
+  width: 55px;
+  height: 55px;
+}
 
 .mess__link {
   margin: 5px;  
   font-size: 36px;
+  opacity: 0.75;
+  transition: font-size 0.3s, opacity 0.3s ease-in;
+}
+
+.mess__link:hover {
+  opacity: 1;
+  font-size: 42px;
 }
 
 .mess__btns-block {
@@ -30,12 +44,13 @@
   flex-direction: column;
   align-items: center;
   position: fixed;
-  bottom: 70px;
+  bottom: 60px;
   right: 20px;
   z-index: 99999;
   padding-bottom: 15px;
+  transition: right 0.5s ease-out;
 }
 
 .mess__btns-block--hidden {
-  visibility: hidden;
+  right: -70px;
 }
