@@ -63,6 +63,7 @@ function makeMess(config) {
   callButton.style.backgroundColor = config.color;
   document.body.appendChild(callButton);
   callButton.onclick = () => btnsBlock.classList.toggle("mess__btns-block--hidden");
+  btnsBlock.onclick = () => btnsBlock.classList.toggle("mess__btns-block--hidden");
     
 }
 
