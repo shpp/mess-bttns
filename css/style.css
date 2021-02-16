@@ -17,37 +17,49 @@
   cursor: pointer;
   border-radius: 50px;
   color:white;
-  opacity: 0.75;
-  transition: opacity 0.3s;
+  transition: box-shadow 0.3s;
 }
 
-.mess__call-btn:hover {
+.mess__call-btn:hover, .mess__call-btn:active {
+  box-shadow: 0 0 5px black;
+  transform: rotate(720deg);
+  transition: transform 0.5s;
+
+}
+
+.mess__call-btn:hover .mess__btns-block--hidden {
   opacity: 1;
+  bottom: 80px;
 }
 
 .mess__link {
-  margin: 5px;  
-  font-size: 36px;
+  display: block;
+  margin-top: 10px;  
+  font-size: 30px;
+  border-radius: 50px;
+  transition: box-shadow 0.3s;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  padding-top: 9px;
 }
 
 .mess__link:hover {
-  font-size: 42px;
+  box-shadow: 0 0  5px black;
 }
 
 .mess__btns-block {
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  bottom: 60px;
+  bottom: 80px;
   right: 15px;
   z-index: 99999;
-  padding-bottom: 15px;
   opacity: 1;
-  transition: right 0.5s, opacity 0.5s;
+  transition: bottom 0.5s, opacity 0.5s;
 }
 
 .mess__btns-block--hidden {
-  right: -70px;
+  bottom: -100px;
   opacity: 0;
 }

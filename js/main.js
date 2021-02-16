@@ -5,10 +5,10 @@ document.body.onload = function() {
     const config = {
       color: "#27ae60",
       messengers: {
-        viber: "380681317564",
         phone: "+380681317564",
         email: "sadovam@gmail.com",
         telegram: "sadovam",
+        viber: "380681317564",
         facebook: "100007885214113",
       }
     };
@@ -22,23 +22,28 @@ function makeMess(config) {
   const messengers = {
     email: {
       icon: '<i class="fas fa-envelope-square"></i>',
-      pre: "mailto:"
+      pre: "mailto:",
+      color: "#848484"
     },
     phone: {
       icon: '<i class="fas fa-phone-square"></i>',
-      pre: "tel:"
+      pre: "tel:",
+      color: "#EC5923"
     },
     viber: {
       icon: '<i class="fab fa-viber"></i>',
-      pre: "viber://chat?number=%2B"
+      pre: "viber://chat?number=%2B",
+      color: "#7B519D"
     },
     facebook: {
       icon: '<i class="fab fa-facebook-messenger"></i>',
-      pre: "fb-messenger://user-thread/"
+      pre: "fb-messenger://user-thread/",
+      color: "#0084FF"
     },
     telegram: {
       icon: '<i class="fab fa-telegram"></i>',
-      pre: "https://t.me/"
+      pre: "https://t.me/",
+      color: "#0088CC"
     }
   };
   
@@ -53,7 +58,8 @@ function makeMess(config) {
     elm.className = "mess__link";
     elm.innerHTML = messengers[m].icon;
     elm.target = "_blank";
-    elm.style.color = config.color;
+    elm.style.backgroundColor = messengers[m].color;
+    elm.style.color = "white";
     btnsBlock.appendChild(elm);
   }
   
@@ -62,8 +68,35 @@ function makeMess(config) {
   callButton.className = "mess__call-btn";
   callButton.style.backgroundColor = config.color;
   document.body.appendChild(callButton);
-  callButton.onclick = () => btnsBlock.classList.toggle("mess__btns-block--hidden");
-  btnsBlock.onclick = () => btnsBlock.classList.toggle("mess__btns-block--hidden");
+  
+  function showMessangers() {
+    btnsBlock.classList.remove("mess__btns-block--hidden");
+    callButton.innerHTML = 'x';
+    callButton.removeEventListener('mouseover', showMessangers);
+  }
+
+  function hideMessangers() {
+    btnsBlock.classList.add("mess__btns-block--hidden");
+    callButton.innerHTML = '<i class="far fa-comment"></i>';
+  }
+
+  callButton.addEventListener('mouseover', showMessangers);
+  
+  callButton.onmouseleave = () => {
+    callButton.addEventListener('mouseover', showMessangers);
+  }
+
+  callButton.onclick = () => {
+    if (btnsBlock.classList.contains("mess__btns-block--hidden")) {
+      showMessangers();
+    } else {
+      hideMessangers();
+    }
+  };
+  
+  btnsBlock.onclick = () => {
+    callButton.addEventListener('mouseover', showMessangers);
+  };
     
 }
 
