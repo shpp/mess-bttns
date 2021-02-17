@@ -22,9 +22,8 @@
 
 .mess__call-btn:hover, .mess__call-btn:active {
   box-shadow: 0 0 5px black;
-  transform: rotate(720deg);
+  transform: rotate(360deg);
   transition: transform 0.5s;
-
 }
 
 .mess__call-btn:hover .mess__btns-block--hidden {

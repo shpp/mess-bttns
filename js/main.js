@@ -1,7 +1,4 @@
 document.body.onload = function() {
-    console.log("hello");
-    
-    
     const config = {
       color: "#27ae60",
       messengers: {
@@ -14,8 +11,6 @@ document.body.onload = function() {
     };
     makeMess(config);
 };
-
-
 
 function makeMess(config) {
   
@@ -46,7 +41,6 @@ function makeMess(config) {
       color: "#0088CC"
     }
   };
-  
 
   const btnsBlock = document.createElement("div");
   btnsBlock.className = "mess__btns-block mess__btns-block--hidden";
@@ -72,18 +66,11 @@ function makeMess(config) {
   function showMessangers() {
     btnsBlock.classList.remove("mess__btns-block--hidden");
     callButton.innerHTML = 'x';
-    callButton.removeEventListener('mouseover', showMessangers);
   }
 
   function hideMessangers() {
     btnsBlock.classList.add("mess__btns-block--hidden");
     callButton.innerHTML = '<i class="far fa-comment"></i>';
-  }
-
-  callButton.addEventListener('mouseover', showMessangers);
-  
-  callButton.onmouseleave = () => {
-    callButton.addEventListener('mouseover', showMessangers);
   }
 
   callButton.onclick = () => {
@@ -95,7 +82,7 @@ function makeMess(config) {
   };
   
   btnsBlock.onclick = () => {
-    callButton.addEventListener('mouseover', showMessangers);
+    hideMessangers();  
   };
     
 }
