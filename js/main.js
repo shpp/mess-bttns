@@ -1,15 +1,32 @@
 document.body.onload = function() {
-    const config = {
-      color: "#27ae60",
-      messengers: {
-        phone: "+380681317564",
-        email: "sadovam@gmail.com",
-        telegram: "sadovam",
-        viber: "380681317564",
-        facebook: "100007885214113",
-      }
-    };
-    makeMess(config);
+  const config = {
+    color: "#27ae60",
+    messengers: {
+      phone: "+380681317564",
+      email: "sadovam@gmail.com",
+      telegram: "sadovam",
+      viber: "380681317564",
+      //facebook: "100007885214113",
+      facebook: "626295794236927",
+    }
+  };
+  
+  makeMess(config);
+  
+  window.fbAsyncInit = function() {
+    FB.init({
+        xfbml            : true,
+        version          : 'v9.0'
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/ru_RU/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 };
 
 function makeMess(config) {
@@ -32,7 +49,8 @@ function makeMess(config) {
     },
     facebook: {
       icon: '<i class="fab fa-facebook-messenger"></i>',
-      pre: "fb-messenger://user-thread/",
+      //pre: "fb-messenger://user-thread/",
+      pre: '',
       color: "#0084FF"
     },
     telegram: {
@@ -47,14 +65,25 @@ function makeMess(config) {
   document.body.appendChild(btnsBlock);
   
   for (let m in config.messengers) {
+    let div = document.createElement("div");
+    div.className = "mess__btn";
+    div.style.backgroundColor = messengers[m].color;
     let elm = document.createElement("a");
+    if (m === "facebook") {
+      document.getElementsByClassName("fb-customerchat")[0].setAttribute("page_id", config.messengers[m]);
+      elm.onclick = (e) => {
+        e.preventDefault();
+        FB.CustomerChat.showDialog();
+      };
+    }
     elm.href = messengers[m].pre + config.messengers[m];
     elm.className = "mess__link";
     elm.innerHTML = messengers[m].icon;
     elm.target = "_blank";
-    elm.style.backgroundColor = messengers[m].color;
+    
     elm.style.color = "white";
-    btnsBlock.appendChild(elm);
+    btnsBlock.appendChild(div);
+    div.appendChild(elm);
   }
   
   const callButton = document.createElement("button");
