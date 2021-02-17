@@ -30,11 +30,6 @@ body {
   transition: transform 0.5s;
 }
 
-.mess__call-btn:hover .mess__btns-block--hidden {
-  opacity: 1;
-  bottom: 80px;
-}
-
 .mess__link {
   display: block;
   margin-top: 10px;  
@@ -44,11 +39,11 @@ body {
   width: 50px;
   height: 50px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 9px;
 }
 
 .mess__link:hover {
-  box-shadow: 0 0  5px black;
+  box-shadow: 0 0  7px black;
 }
 
 .mess__btns-block {
