@@ -1,4 +1,4 @@
-document.body.onload = function() {
+window.onload = function() {
   // facebook messanger chat code belower
 
   window.fbAsyncInit = function() {
