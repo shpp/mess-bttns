@@ -1,25 +1,4 @@
 document.body.onload = function() {
-  const config = {
-    color: "#27ae60",
-    title: "Зв'яжіться з нами",
-    messengers: {
-      phone: "+380681317564",
-      email: "sadovam@gmail.com",
-      telegram: "sadovam",
-      viber: "380681317564",
-      facebook: "626295794236927",
-    },
-    titles: {
-      phone: "Зателефонувати",
-      email: "Написати листа",
-      telegram: "Написати у Telegram",
-      viber: "Написати у Viber",
-      facebook: "Facebook Messenger",
-    },
-  };
-  
-  makeMess(config);
-  
   // facebook messanger chat code belower
 
   window.fbAsyncInit = function() {
@@ -116,6 +95,15 @@ function makeMess(config) {
     }
   };
 
+  document.body.innerHTML += `<div id="fb-root"></div>
+  <div class="fb-customerchat"
+         attribution="setup_tool"
+         theme_color="#27ae60"
+         logged_in_greeting="Привіт! Маєш питання? Пиши нам ;)"
+         logged_out_greeting="Привіт! Маєш питання? Пиши нам ;)">
+    </div>
+    <script src="https://kit.fontawesome.com/c5b7962841.js" crossorigin="anonymous"></script>
+    `;
   const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
 
