@@ -111,27 +111,27 @@ function makeMess(config) {
 
   const callButton = makeCallButton(config);
   document.body.appendChild(callButton);
-  
-  function showMessangers() {
+
+  function showMessengers() {
     btnsBlock.classList.remove("mess__btns-block--hidden");
     callButton.innerHTML = 'x';
   }
 
-  function hideMessangers() {
+  function hideMessengers() {
     btnsBlock.classList.add("mess__btns-block--hidden");
     callButton.innerHTML = '<i class="far fa-comment"></i>';
   }
 
   callButton.onclick = () => {
     if (btnsBlock.classList.contains("mess__btns-block--hidden")) {
-      showMessangers();
+      showMessengers();
     } else {
-      hideMessangers();
+      hideMessengers();
     }
   };
   
   btnsBlock.onclick = () => {
-    hideMessangers();  
+    hideMessengers();
   };
     
 }
