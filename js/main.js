@@ -94,6 +94,7 @@ function makeMess(config) {
       color: "#0088CC"
     }
   };
+  const libPath = document.getElementById('messengers-widget').src.match(/(https?:\/\/.+)\/js/g)[1]
 
   document.body.innerHTML += `<div id="fb-root"></div>
   <div class="fb-customerchat"
@@ -103,7 +104,7 @@ function makeMess(config) {
          logged_out_greeting="Привіт! Маєш питання? Пиши нам ;)">
     </div>
     <script src="https://kit.fontawesome.com/c5b7962841.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${libPath}/css/style.css">
     `;
   const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
