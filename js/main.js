@@ -103,6 +103,7 @@ function makeMess(config) {
          logged_out_greeting="Привіт! Маєш питання? Пиши нам ;)">
     </div>
     <script src="https://kit.fontawesome.com/c5b7962841.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
     `;
   const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
