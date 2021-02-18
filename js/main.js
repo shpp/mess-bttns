@@ -1,18 +1,27 @@
 document.body.onload = function() {
   const config = {
     color: "#27ae60",
+    title: "Зв'яжіться з нами",
     messengers: {
       phone: "+380681317564",
       email: "sadovam@gmail.com",
       telegram: "sadovam",
       viber: "380681317564",
-      //facebook: "100007885214113",
       facebook: "626295794236927",
-    }
+    },
+    titles: {
+      phone: "Зателефонувати",
+      email: "Написати листа",
+      telegram: "Написати у Telegram",
+      viber: "Написати у Viber",
+      facebook: "Facebook Messenger",
+    },
   };
   
   makeMess(config);
   
+  // facebook messanger chat code belower
+
   window.fbAsyncInit = function() {
     FB.init({
         xfbml            : true,
@@ -27,7 +36,55 @@ document.body.onload = function() {
     js.src = 'https://connect.facebook.net/ru_RU/sdk/xfbml.customerchat.js';
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+  
 };
+
+
+
+// Creates block of messengers buttons
+function makeButtonsBlock(config, messengers) {
+  
+  const btnsBlock = document.createElement("div");
+  btnsBlock.className = "mess__btns-block mess__btns-block--hidden";
+  
+  for (let m in config.messengers) {
+    
+    let div = document.createElement("div");
+    div.className = "mess__btn";
+    div.style.backgroundColor = messengers[m].color;
+    
+    let elm = document.createElement("a");
+    // facebook messanger works throught his own chat
+    if (m === "facebook") {
+      document.getElementsByClassName("fb-customerchat")[0].setAttribute("page_id", config.messengers[m]);
+      elm.onclick = (e) => {
+        e.preventDefault();
+        FB.CustomerChat.showDialog();
+      };
+    }
+    
+    elm.href = messengers[m].pre + config.messengers[m];
+    elm.className = "mess__link";
+    elm.innerHTML = messengers[m].icon;
+    elm.target = "_blank";
+    elm.title = config.titles[m];
+    
+    elm.style.color = "white";
+    btnsBlock.appendChild(div);
+    div.appendChild(elm);
+  }
+
+  return btnsBlock;
+}
+
+function makeCallButton({color, title}) {
+  const callButton = document.createElement("button");
+  callButton.innerHTML = '<i class="far fa-comment"></i>';
+  callButton.className = "mess__call-btn";
+  callButton.style.backgroundColor = color;
+  callButton.title = title;
+  return callButton;
+}
 
 function makeMess(config) {
   
@@ -49,7 +106,6 @@ function makeMess(config) {
     },
     facebook: {
       icon: '<i class="fab fa-facebook-messenger"></i>',
-      //pre: "fb-messenger://user-thread/",
       pre: '',
       color: "#0084FF"
     },
@@ -60,36 +116,10 @@ function makeMess(config) {
     }
   };
 
-  const btnsBlock = document.createElement("div");
-  btnsBlock.className = "mess__btns-block mess__btns-block--hidden";
+  const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
-  
-  for (let m in config.messengers) {
-    let div = document.createElement("div");
-    div.className = "mess__btn";
-    div.style.backgroundColor = messengers[m].color;
-    let elm = document.createElement("a");
-    if (m === "facebook") {
-      document.getElementsByClassName("fb-customerchat")[0].setAttribute("page_id", config.messengers[m]);
-      elm.onclick = (e) => {
-        e.preventDefault();
-        FB.CustomerChat.showDialog();
-      };
-    }
-    elm.href = messengers[m].pre + config.messengers[m];
-    elm.className = "mess__link";
-    elm.innerHTML = messengers[m].icon;
-    elm.target = "_blank";
-    
-    elm.style.color = "white";
-    btnsBlock.appendChild(div);
-    div.appendChild(elm);
-  }
-  
-  const callButton = document.createElement("button");
-  callButton.innerHTML = '<i class="far fa-comment"></i>';
-  callButton.className = "mess__call-btn";
-  callButton.style.backgroundColor = config.color;
+
+  const callButton = makeCallButton(config);
   document.body.appendChild(callButton);
   
   function showMessangers() {
