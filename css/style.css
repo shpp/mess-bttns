@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-  background-color: #2E3436;
-}
-
 .mess__call-btn {
   position: fixed;
   bottom: 20px;
