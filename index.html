@@ -4,19 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Title</title>
-<script src="https://kit.fontawesome.com/c5b7962841.js" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="fb-root"></div>
-  <!-- Your Chat Plugin code -->
-  <div class="fb-customerchat"
-       attribution="setup_tool"
-       theme_color="#27ae60"
-       logged_in_greeting="Привіт! Маєш питання? Пиши нам ;)"
-       logged_out_greeting="Привіт! Маєш питання? Пиши нам ;)">
-  </div>
-  <script src="js/main.js"></script>
+
+  <script src="js/main.js" id="messengers-widget"></script>
+  <script>
+    const config = {
+      color: "#27ae60",
+      title: "Зв'яжіться з нами",
+      messengers: {
+        phone: "+380681317564",
+        email: "sadovam@gmail.com",
+        telegram: "sadovam",
+        viber: "380681317564",
+        facebook: "626295794236927",
+      },
+      titles: {
+        phone: "Зателефонувати",
+        email: "Написати листа",
+        telegram: "Написати у Telegram",
+        viber: "Написати у Viber",
+        facebook: "Facebook Messenger",
+      },
+    };
+
+    makeMess(config);
+  </script>
 </body>
 </html>
