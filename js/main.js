@@ -94,7 +94,7 @@ function makeMess(config) {
       color: "#0088CC"
     }
   };
-  const libPath = document.getElementById('messengers-widget').src.match(/(https?:\/\/.+)\/js/g)[1]
+  const libPath = document.getElementById('messengers-widget').src.match(/(https?:\/\/.+)\/js/)[1]
 
   document.body.innerHTML += `<div id="fb-root"></div>
   <div class="fb-customerchat"
