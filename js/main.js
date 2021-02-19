@@ -215,7 +215,7 @@ function makeMess(config) {
     }
   };
   
-  const links = document.getElementsByClassName("mess__link");
+  const links = document.getElementsByClassName("mess__btn");
   for (let i = 0; i < links.length; i++) {
     links[i].onclick = hideMessengers;
   }
