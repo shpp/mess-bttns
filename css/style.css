@@ -46,13 +46,6 @@
   box-shadow: 0 0  7px black;
 }
 
-.mess__btn:hover .mess__baloon, .mess__call-btn-div:hover .mess__baloon {
-  right: 60px;
-  opacity: 1;
-  width: max-content;
-  transition: right 0.5s, opacity 0.5s;
-}
-
 .mess__btns-block {
   display: flex;
   flex-direction: column;
@@ -87,4 +80,13 @@
 
 .fb_dialog {
   visibility: hidden;
+}
+
+@media (hover: hover) {
+  .mess__btn:hover .mess__baloon, .mess__call-btn-div:hover .mess__baloon {
+    right: 60px;
+    opacity: 1;
+    width: max-content;
+    transition: right 0.5s, opacity 0.5s;
+  }
 }
