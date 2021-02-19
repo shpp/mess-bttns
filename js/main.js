@@ -45,9 +45,8 @@ function makeButtonsBlock(config, messengers) {
     elm.href = messengers[m].pre + config.messengers[m];
     elm.className = "mess__link";
     elm.innerHTML = messengers[m].icon;
+    elm.appendChild(makeBaloon(config.titles[m]));
     elm.target = "_blank";
-    elm.title = config.titles[m];
-    
     elm.style.color = "white";
     btnsBlock.appendChild(div);
     div.appendChild(elm);
@@ -56,12 +55,23 @@ function makeButtonsBlock(config, messengers) {
   return btnsBlock;
 }
 
+function makeBaloon(title) {
+  const baloon = document.createElement('p');
+  baloon.className = 'mess__baloon';
+  baloon.innerHTML = title;
+  return baloon;
+}
+
 function makeCallButton({color, title}, messengersIcon) {
+  const callButtonDiv = document.createElement("div");
+  callButtonDiv.className = "mess__call-btn-div";
   const callButton = document.createElement("button");
   callButton.innerHTML = messengersIcon;
   callButton.className = "mess__call-btn";
   callButton.style.backgroundColor = color;
-  callButton.title = title;
+  callButtonDiv.appendChild(callButton);
+  callButtonDiv.appendChild(makeBaloon(title));
+  document.body.appendChild(callButtonDiv);
   return callButton;
 }
 
@@ -182,12 +192,11 @@ function makeMess(config) {
     <link rel="stylesheet" href="${libPath}/css/style.css">
     `;
   
-    const btnsBlock = makeButtonsBlock(config, messengers);
+  const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
 
   const callButton = makeCallButton(config, messengersIcon);
-  document.body.appendChild(callButton);
-
+  
   function showMessengers() {
     btnsBlock.classList.remove("mess__btns-block--hidden");
     callButton.innerHTML = closeIcon;
@@ -209,6 +218,6 @@ function makeMess(config) {
   btnsBlock.onclick = () => {
     hideMessengers();
   };
-    
+
 }
 
