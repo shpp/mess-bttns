@@ -215,9 +215,10 @@ function makeMess(config) {
     }
   };
   
-  btnsBlock.onclick = () => {
-    hideMessengers();
-  };
-
+  const links = document.getElementsByClassName("mess__link");
+  for (let i = 0; i < links.length; i++) {
+    links[i].onclick = hideMessengers;
+  }
+  
 }
 
