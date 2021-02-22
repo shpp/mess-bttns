@@ -212,7 +212,7 @@ function MessengersWidget(config) {
     `;
   }
 
-  const libPath = ((document.currentScript || document.querySelector('script[src*="main.js"]'))
+  const libPath = (document.querySelector('script[src*="messengers-widget.js"]')
       .src.match(/(https?:\/\/.+)\/js/) || [])[1] || '.'
 
   const styles = document.createElement('link')
