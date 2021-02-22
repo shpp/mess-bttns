@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+#messengers-widget {
+  position: fixed;
+}
+
 .mess__call-btn, .mess__call-btn-div {
   position: fixed;
   bottom: 20px;
