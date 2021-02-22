@@ -122,16 +122,14 @@ window.onload = function() {
 // Creates block of messengers buttons
 function makeButtonsBlock(config, messengers) {
 
-  const btnsBlock = document.createElement("span");
-  btnsBlock.className = "mess__btns-block mess__btns-block--hidden";
+  const btnsBlock = createElement("span", {class: "mess__btns-block mess__btns-block--hidden"});
 
   for (let m in config.messengers) {
 
-    let div = document.createElement("span");
-    div.className = "mess__btn";
+    let div = createElement("span", {class: "mess__btn"});
     div.style.backgroundColor = messengers[m].color;
 
-    let elm = document.createElement("a");
+    let elm = createElement("a");
     // facebook messanger works throught his own chat
     if (m === "facebook") {
       document.getElementsByClassName("fb-customerchat")[0].setAttribute("page_id", config.messengers[m]);
@@ -155,18 +153,15 @@ function makeButtonsBlock(config, messengers) {
 }
 
 function makeBaloon(title) {
-  const baloon = document.createElement('p');
-  baloon.className = 'mess__baloon';
-  baloon.innerHTML = title;
-  return baloon;
+  return createElement('p', {class: 'mess__baloon', innerHTML: title});
 }
 
 function makeCallButton({color, title}, messengersIcon) {
-  const callButtonDiv = document.createElement("span");
-  callButtonDiv.className = "mess__call-btn-div";
-  const callButton = document.createElement("button");
-  callButton.innerHTML = messengersIcon;
-  callButton.className = "mess__call-btn";
+  const callButtonDiv = createElement("span", {class: "mess__call"});
+  const callButton = createElement("button", {
+    innerHTML: messengersIcon,
+    className: "mess__call-btn",
+  });
   callButton.style.backgroundColor = color;
   callButtonDiv.appendChild(callButton);
   callButtonDiv.appendChild(makeBaloon(title));
@@ -174,8 +169,7 @@ function makeCallButton({color, title}, messengersIcon) {
 }
 
 function makeContainer() {
-  const div = document.createElement('div');
-  div.id = 'messengers-widget';
+  const div = createElement('div', {id: 'messengers-widget'});
   document.body.appendChild(div);
   return div;
 }
@@ -213,13 +207,16 @@ function initMessengersWidget(config) {
     links[i].onclick = hideMessengers;
   }
 }
+function createElement(tag, params) {
+  const el = document.createElement('tag');
+  Object.keys(params).forEach(key => el[key] = params[key]);
+  return el
+}
 
 function MessengersWidget(config) {
   if(config.messengers.facebook && !document.getElementById('fb-root')) {
-    document.body.innerHTML += `
-      <div id="fb-root"></div>
-      <div class="fb-customerchat"></div>    
-    `;
+    document.body.appendChild(createElement('div', {class: 'fb-customerchat'}))
+    document.body.appendChild(createElement('div', {id: 'fb-root'}))
   }
 
   if(document.getElementById('messengers-widget-styles')) {
@@ -227,13 +224,14 @@ function MessengersWidget(config) {
   } else {
     const libPath = (document.querySelector('script[src*="messengers-widget.js"]')
         .src.match(/(https?:\/\/.+)\/js/) || [])[1] || '.'
-    const styles = document.createElement('link')
-    styles.id = 'messengers-widget-styles';
-    styles.rel = 'stylesheet';
-    styles.type = 'text/css';
-    styles.href = `${libPath}/css/style.css`;
-    styles.media = 'all';
-    styles.onload = () => initMessengersWidget(config);
+    const styles = createElement('link', {
+      id: 'messengers-widget-styles',
+      rel: 'stylesheet',
+      type: 'text/css',
+      href: `${libPath}/css/style.css`,
+      media: 'all',
+      onload: () => initMessengersWidget(config),
+    })
     document.head.appendChild(styles);
   }
 }
