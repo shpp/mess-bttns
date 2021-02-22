@@ -122,17 +122,17 @@ window.onload = function() {
 // Creates block of messengers buttons
 function makeButtonsBlock(config, messengers) {
 
-  const btnsBlock = createElement('span', {class: 'mess__btns-block mess__btns-block--hidden'});
+  const btnsBlock = createElement('span', {className: 'mess__btns-block mess__btns-block--hidden'});
 
   for (let m in config.messengers) {
 
-    let div = createElement('span', {class: 'mess__btn'});
+    let div = createElement('span', {className: 'mess__btn'});
     div.style.backgroundColor = messengers[m].color;
 
     let elm = createElement('a');
     // facebook messanger works throught his own chat
     if (m === 'facebook') {
-      document.getElementsByClassName('fb-customerchat')[0].setAttribute('page_id', config.messengers[m]);
+      document.querySelector('.fb-customerchat').setAttribute('page_id', config.messengers[m]);
       elm.onclick = (e) => {
         e.preventDefault();
         FB.CustomerChat.showDialog();
@@ -153,11 +153,11 @@ function makeButtonsBlock(config, messengers) {
 }
 
 function makeBaloon(title) {
-  return createElement('p', {class: 'mess__baloon', innerHTML: title});
+  return createElement('p', {className: 'mess__baloon', innerHTML: title});
 }
 
 function makeCallButton({color, title}, messengersIcon) {
-  const callButtonDiv = createElement('span', {class: 'mess__call'});
+  const callButtonDiv = createElement('span', {className: 'mess__call'});
   const callButton = createElement('button', {
     innerHTML: messengersIcon,
     className: 'mess__call-btn',
@@ -208,7 +208,7 @@ function initMessengersWidget(config) {
   }
 }
 function createElement(tag, params) {
-  const el = document.createElement('tag');
+  const el = document.createElement(tag);
   if (params) {
     Object.keys(params).forEach(key => el[key] = params[key]);
   }
@@ -217,7 +217,7 @@ function createElement(tag, params) {
 
 function MessengersWidget(config) {
   if(config.messengers.facebook && !document.getElementById('fb-root')) {
-    document.body.appendChild(createElement('div', {class: 'fb-customerchat'}))
+    document.body.appendChild(createElement('div', {className: 'fb-customerchat'}))
     document.body.appendChild(createElement('div', {id: 'fb-root'}))
   }
 
