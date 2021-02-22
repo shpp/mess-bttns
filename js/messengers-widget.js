@@ -192,12 +192,12 @@ function initMessengersWidget(config) {
 
   function showMessengers() {
     btnsBlock.classList.remove("mess__btns-block--hidden");
-    callButton.innerHTML = closeIcon;
+    callButton.children[0].innerHTML = closeIcon;
   }
 
   function hideMessengers() {
     btnsBlock.classList.add("mess__btns-block--hidden");
-    callButton.innerHTML = messengersIcon;
+    callButton.children[0].innerHTML = messengersIcon;
   }
 
   callButton.onclick = () => {
