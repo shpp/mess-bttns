@@ -8,8 +8,8 @@ const messengers = {
       <path d="M4.51,86.721C1.703,92.588,0,99.073,0,106v300c0,6.923,1.701,13.409,4.506,19.274L173.789,256L4.51,86.721z" fill="white"/>
       <path d="M317.002,277.213l-51.396,49.393c-2.93,2.93-6.768,4.395-10.605,4.395s-7.676-1.465-10.605-4.395L195,277.211
       L25.714,446.486C31.582,449.295,38.071,451,45,451h422c6.927,0,13.412-1.703,19.279-4.51L317.002,277.213z" fill="white"/></svg>`,
-    pre: "mailto:",
-    color: "#848484"
+    pre: 'mailto:',
+    color: '#848484'
   },
   phone: {
     icon: `<svg xmlns="http://www.w3.org/2000/svg"  height="30" viewBox="0 0 512 512" width="30" >
@@ -24,8 +24,8 @@ const messengers = {
       c13.659,13.718,28.508,26.197,44.373,37.291c9.167,6.394,21.595,5.316,29.525-2.56l27.221-27.648
       c4.223-4.242,11.085-4.257,15.326-0.034c0.011,0.011,0.022,0.022,0.034,0.034l48.043,48.128
       C391.911,345.502,391.926,352.363,387.703,356.605z" fill="white"/></svg>`,
-    pre: "tel:",
-    color: "#EC5923"
+    pre: 'tel:',
+    color: '#EC5923'
   },
   viber: {
     icon: `<svg id="Bold" enable-background="new 0 0 24 24" 
@@ -59,7 +59,7 @@ const messengers = {
       -11.112s-12 4.974-12 11.111zm10.734-3.112 3.13 3.259 5.887-3.259-6.56 6.962-3.055
       -3.258-5.963 3.259z" fill="white"/></svg>`,
     pre: '',
-    color: "#0084FF"
+    color: '#0084FF'
   },
   telegram: {
     icon:`<svg id="Bold" enable-background="new 0 0 24 24" 
@@ -69,8 +69,8 @@ const messengers = {
       -.146.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213
       -3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643
       -.204-.657-.643.136-.953z" fill="white"/></svg>`,
-    pre: "https://t.me/",
-    color: "#0088CC"
+    pre: 'https://t.me/',
+    color: '#0088CC'
   }
 };
 
@@ -122,17 +122,17 @@ window.onload = function() {
 // Creates block of messengers buttons
 function makeButtonsBlock(config, messengers) {
 
-  const btnsBlock = createElement("span", {class: "mess__btns-block mess__btns-block--hidden"});
+  const btnsBlock = createElement('span', {class: 'mess__btns-block mess__btns-block--hidden'});
 
   for (let m in config.messengers) {
 
-    let div = createElement("span", {class: "mess__btn"});
+    let div = createElement('span', {class: 'mess__btn'});
     div.style.backgroundColor = messengers[m].color;
 
-    let elm = createElement("a");
+    let elm = createElement('a');
     // facebook messanger works throught his own chat
-    if (m === "facebook") {
-      document.getElementsByClassName("fb-customerchat")[0].setAttribute("page_id", config.messengers[m]);
+    if (m === 'facebook') {
+      document.getElementsByClassName('fb-customerchat')[0].setAttribute('page_id', config.messengers[m]);
       elm.onclick = (e) => {
         e.preventDefault();
         FB.CustomerChat.showDialog();
@@ -140,11 +140,11 @@ function makeButtonsBlock(config, messengers) {
     }
 
     elm.href = messengers[m].pre + config.messengers[m];
-    elm.className = "mess__link";
+    elm.className = 'mess__link';
     elm.innerHTML = messengers[m].icon;
     elm.appendChild(makeBaloon(config.titles[m]));
-    elm.target = "_blank";
-    elm.style.color = "white";
+    elm.target = '_blank';
+    elm.style.color = 'white';
     btnsBlock.appendChild(div);
     div.appendChild(elm);
   }
@@ -157,10 +157,10 @@ function makeBaloon(title) {
 }
 
 function makeCallButton({color, title}, messengersIcon) {
-  const callButtonDiv = createElement("span", {class: "mess__call"});
-  const callButton = createElement("button", {
+  const callButtonDiv = createElement('span', {class: 'mess__call'});
+  const callButton = createElement('button', {
     innerHTML: messengersIcon,
-    className: "mess__call-btn",
+    className: 'mess__call-btn',
   });
   callButton.style.backgroundColor = color;
   callButtonDiv.appendChild(callButton);
@@ -185,31 +185,33 @@ function initMessengersWidget(config) {
   widgetContainer.appendChild(callButton)
 
   function showMessengers() {
-    btnsBlock.classList.remove("mess__btns-block--hidden");
+    btnsBlock.classList.remove('mess__btns-block--hidden');
     callButton.children[0].innerHTML = closeIcon;
   }
 
   function hideMessengers() {
-    btnsBlock.classList.add("mess__btns-block--hidden");
+    btnsBlock.classList.add('mess__btns-block--hidden');
     callButton.children[0].innerHTML = messengersIcon;
   }
 
   callButton.onclick = () => {
-    if (btnsBlock.classList.contains("mess__btns-block--hidden")) {
+    if (btnsBlock.classList.contains('mess__btns-block--hidden')) {
       showMessengers();
     } else {
       hideMessengers();
     }
   };
 
-  const links = document.getElementsByClassName("mess__btn");
+  const links = document.getElementsByClassName('mess__btn');
   for (let i = 0; i < links.length; i++) {
     links[i].onclick = hideMessengers;
   }
 }
 function createElement(tag, params) {
   const el = document.createElement('tag');
-  Object.keys(params).forEach(key => el[key] = params[key]);
+  if (params) {
+    Object.keys(params).forEach(key => el[key] = params[key]);
+  }
   return el
 }
 
