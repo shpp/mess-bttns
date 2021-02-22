@@ -170,13 +170,13 @@ function makeCallButton({color, title}, messengersIcon) {
   callButton.style.backgroundColor = color;
   callButtonDiv.appendChild(callButton);
   callButtonDiv.appendChild(makeBaloon(title));
-  document.body.appendChild(callButtonDiv);
-  return callButton;
+  return callButtonDiv;
 }
 
 function makeContainer() {
   const div = document.createElement('div');
   div.id = 'messengers-widget';
+  document.body.appendChild(div);
   return div;
 }
 
@@ -188,6 +188,7 @@ function initMessengersWidget(config) {
   widgetContainer.appendChild(btnsBlock);
 
   const callButton = makeCallButton(config, messengersIcon);
+  widgetContainer.appendChild(callButton)
 
   function showMessengers() {
     btnsBlock.classList.remove("mess__btns-block--hidden");
