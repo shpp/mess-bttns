@@ -174,7 +174,16 @@ function makeCallButton({color, title}, messengersIcon) {
   return callButton;
 }
 
+function makeContainer() {
+  const div = document.createElement('div');
+  div.id = 'messengers-widget';
+  return div;
+}
+
 function initMessengersWidget(config) {
+  const widgetContainer = document.querySelector('#messengers-widget') || makeContainer()
+  widgetContainer.innerHTML = '';
+
   const btnsBlock = makeButtonsBlock(config, messengers);
   document.body.appendChild(btnsBlock);
 
@@ -205,22 +214,26 @@ function initMessengersWidget(config) {
 }
 
 function MessengersWidget(config) {
-  if(config.messengers.facebook) {
+  if(config.messengers.facebook && !document.getElementById('fb-root')) {
     document.body.innerHTML += `
       <div id="fb-root"></div>
       <div class="fb-customerchat"></div>    
     `;
   }
 
-  const libPath = (document.querySelector('script[src*="messengers-widget.js"]')
-      .src.match(/(https?:\/\/.+)\/js/) || [])[1] || '.'
-
-  const styles = document.createElement('link')
-  styles.rel  = 'stylesheet';
-  styles.type = 'text/css';
-  styles.href = `${libPath}/css/style.css`;
-  styles.media = 'all';
-  styles.onload = () => initMessengersWidget(config);
-  document.head.appendChild(styles);
+  if(document.getElementById('messengers-widget-styles')) {
+    initMessengersWidget(config)
+  } else {
+    const libPath = (document.querySelector('script[src*="messengers-widget.js"]')
+        .src.match(/(https?:\/\/.+)\/js/) || [])[1] || '.'
+    const styles = document.createElement('link')
+    styles.id = 'messengers-widget-styles';
+    styles.rel = 'stylesheet';
+    styles.type = 'text/css';
+    styles.href = `${libPath}/css/style.css`;
+    styles.media = 'all';
+    styles.onload = () => initMessengersWidget(config);
+    document.head.appendChild(styles);
+  }
 }
 
