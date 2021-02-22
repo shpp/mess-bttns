@@ -6,6 +6,7 @@
 
 #messengers-widget {
   position: fixed;
+  z-index: 1;
 }
 
 .mess__call-btn, .mess__call-btn-div {
