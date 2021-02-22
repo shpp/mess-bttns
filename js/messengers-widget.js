@@ -185,7 +185,7 @@ function initMessengersWidget(config) {
   widgetContainer.innerHTML = '';
 
   const btnsBlock = makeButtonsBlock(config, messengers);
-  document.body.appendChild(btnsBlock);
+  widgetContainer.appendChild(btnsBlock);
 
   const callButton = makeCallButton(config, messengersIcon);
 
